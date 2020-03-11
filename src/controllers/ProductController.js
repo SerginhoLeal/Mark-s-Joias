@@ -14,7 +14,7 @@ function generateToken(params = {}){
 module.exports = {
     async index(req, res){
         const {page = 1} = req.query;
-        const products = await Product.paginate({},{page, limit:5});
+        const products = await Product.paginate({},{page, limit:10});
         return res.json(products);
     },
 
@@ -38,10 +38,13 @@ module.exports = {
     },
 
     async store(req, res){
-        const {email} = req.body;
+        const {nome,email} = req.body;
     try{
-        if(await Product.findOne({email}))
+        if(await Product.findOne({email}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Email já em uso!'});
+        
+        if(await Product.findOne({nome}))//se encontrar um email o cadastro não será realizado
+            return res.status(400).send({error:'Nome já em uso!'});
 
         const user = await Product.create(req.body);
 
@@ -54,15 +57,30 @@ module.exports = {
             return res.statusCode(400).send({error:'fail'});
         }
     },
+
     async show(req, res){
         const product = await Product.findById(req.params.id);
         return res.json(product);
     },
 
+    async show2(req, res){
+        const product = await Product.find(req.params);
+        try{
+            const user = await Product.findOne({nome});
+
+            if(!user)
+                return res.status(401).send({error:'Não existe'});
+                
+        }catch{
+            return res.json(product);
+        }
+    },
 
     async update(req, res){
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
-        return res.json(product);
+        const user = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
+        user.password = undefined;
+
+        return res.json(user);
     },
 
     async destroy(req,res){

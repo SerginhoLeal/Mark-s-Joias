@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-    //'mongodb://localhost/marks',
+    // 'mongodb://localhost/marks',
     process.env.MONGO_URL,
     {
         useNewUrlParser: true,

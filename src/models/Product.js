@@ -24,7 +24,15 @@ const ProductSchema = new mongoose.Schema({
     data:{
         type: Date,
         default:Date.now,
-    }
+    },
+    // likes: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Product',
+    // }],
+    // dislikes: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Product',
+    // }],
 });
 
 ProductSchema.pre('save', async function(next){

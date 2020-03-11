@@ -3,3 +3,8 @@ node_modules
 .env
 
 uso.js
+
+src/controllers/DislikeController.js
+
+src/controllers/LikeController.js
+
