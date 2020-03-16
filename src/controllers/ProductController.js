@@ -63,19 +63,6 @@ module.exports = {
         return res.json(product);
     },
 
-    async show2(req, res){
-        const product = await Product.find(req.params);
-        try{
-            const user = await Product.findOne({nome});
-
-            if(!user)
-                return res.status(401).send({error:'Não existe'});
-                
-        }catch{
-            return res.json(product);
-        }
-    },
-
     async update(req, res){
         const user = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
         user.password = undefined;
