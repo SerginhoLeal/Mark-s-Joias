@@ -4,13 +4,13 @@ const Product = mongoose.model('Product');
 
 module.exports = {
     async index(req, res){
-        const {nome} = req.query;
+        const {descript} = req.query;
 
-        const nome_usuario = nome.split(',').map(no => no.trim());
+        const desc = descript.split(',').map(no => no.trim());
 
         const usuarios = await Product.find({
-            nome:{
-                $in:nome_usuario,
+            description:{
+                $in:desc,
             },
         });
 
