@@ -39,6 +39,7 @@ module.exports = {
 
     async store(req, res){
         const {nome,email} = req.body;
+        // const desc = descript.split(',').map(no => no.trim());
     try{
         if(await Product.findOne({email}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Email já em uso!'});

@@ -17,9 +17,13 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         select:false,
     },
+    elo:{
+        type:String,
+        required:false,
+    },
     description:{
         type:String,
-        required:true,
+        required:false,
     },
     data:{
         type: Date,
